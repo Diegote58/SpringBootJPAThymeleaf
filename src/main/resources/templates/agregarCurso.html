@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Formulario</title>
+</head>
+<body>
+	
+	<form action="#" th:action="@{/course/save}" th:object="${course}" method="post">
+		<p>NAME: <input type="text" name="name" th:field="*{name}" ></input></p>
+		<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+		<p>DESCRIPTION: <input type="text" name="description" th:field="*{description}" ></input></p>
+		<p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+		<p>PRICE: <input type="number" name="price" th:field="*{price}" ></input></p>
+		<p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+		<p>HOURS: <input type="number" name="hours" th:field="*{hours}" ></input></p>
+		<p th:if="${#fields.hasErrors('hours')}" th:errors="*{hours}"></p>
+		
+		<input type="submit" value="ENVIAR"></input>
+	</form>
+
+</body>
+</html>
