@@ -13,11 +13,12 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import com.sistema.component.RequestTimerInterceptor;
 
 @Configuration
-public class WebMvcConfiguration extends WebMvcConfigurerAdapter{
+public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	@Qualifier("requestTimerInterceptor")
 	private RequestTimerInterceptor requestTimerInterceptor;
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(requestTimerInterceptor);

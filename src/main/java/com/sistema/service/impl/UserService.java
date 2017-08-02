@@ -25,25 +25,33 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
 		User us = userRepository.findByUsername(username);
-		List<GrantedAuthority> authorities = buildAuthorities(us.getUserRole());
-		return buildUser(us, authorities);
+		
+		if (us == null)
+			throw new UsernameNotFoundException("Not Exist User");
+		else{
+			List<GrantedAuthority> authorities = buildAuthorities(us.getUserRole());
+			return buildUser(us, authorities);	
+		}
 	}
 
-	private org.springframework.security.core.userdetails.User buildUser(User user, List<GrantedAuthority> authorities) {
-		return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),user.isEnabled(),true,true,true,authorities);
+	private org.springframework.security.core.userdetails.User buildUser(User user,
+			List<GrantedAuthority> authorities) {
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+				user.isEnabled(), true, true, true, authorities);
 	}
-	
-	private List<GrantedAuthority> buildAuthorities(Set<UserRole> userRoles){
+
+	private List<GrantedAuthority> buildAuthorities(Set<UserRole> userRoles) {
 		Set<GrantedAuthority> auth = new HashSet<GrantedAuthority>();
-		for(UserRole userRole : userRoles){
+
+		for (UserRole userRole : userRoles) {
 			auth.add(new SimpleGrantedAuthority(userRole.getRol()));
-			
 		}
-		
+
 		return new ArrayList<GrantedAuthority>(auth);
 	}
 }
