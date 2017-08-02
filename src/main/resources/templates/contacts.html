@@ -67,12 +67,14 @@
 				<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 				Add contact
 			</button>
-		</a> <a href="#" th:href="@{/login?logout}">
+		</a> 
+		<form th:action="@{/logout}" method="POST">
+	      	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}]"/>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">
 				<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
 				Logout
 			</button>
-		</a>
+		</form>
 	</div>
 
 
