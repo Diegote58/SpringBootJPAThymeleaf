@@ -13,5 +13,19 @@ spring:
          
     properties:
       hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+        type: trace 
         dialect: org.hibernate.dialect.MySQL5Dialect
-  
+  thymeleaf:
+    cache: false
+logging:
+  level:
+    org:
+      hibernate:
+        sql: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder:TRACE
